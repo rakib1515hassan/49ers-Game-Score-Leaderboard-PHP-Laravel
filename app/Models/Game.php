@@ -14,6 +14,9 @@ class Game extends Model
         'location',
         'team1_id',
         'team2_id',
+        'score',
+        'result',
+        'win_team_id',
     ];
 
     public function team1()
@@ -24,5 +27,10 @@ class Game extends Model
     public function team2()
     {
         return $this->belongsTo(Team::class, 'team2_id');
+    }
+
+    public function winTeam()
+    {
+        return $this->belongsTo(Team::class, 'win_team_id');
     }
 }

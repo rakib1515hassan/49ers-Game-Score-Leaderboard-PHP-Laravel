@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\{Game, Player, User};
 
 class Team extends Model
 {
@@ -12,8 +13,6 @@ class Team extends Model
     protected $fillable = [
         'name',
         'title',
-        'result',
-        'score',
         'logo',
     ];
 
@@ -25,5 +24,11 @@ class Team extends Model
     public function gamesAsTeam2()
     {
         return $this->hasMany(Game::class, 'team2_id');
+    }
+
+    // A team can have many players
+    public function players()
+    {
+        return $this->hasMany(Player::class);
     }
 }

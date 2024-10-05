@@ -15,10 +15,15 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->date('date');
-            $table->string('location');
             $table->foreignId('team1_id')->constrained('teams')->onDelete('cascade');
             $table->foreignId('team2_id')->constrained('teams')->onDelete('cascade');
+
+            $table->date('date');
+            $table->string('location');
+            $table->string('score')->nullable();
+            $table->string('result')->nullable();
+            $table->foreignId('win_team_id')->nullable()->constrained('teams')->onDelete('cascade');
+
         });
     }
 

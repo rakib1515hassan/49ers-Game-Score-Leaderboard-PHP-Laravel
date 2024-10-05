@@ -17,8 +17,6 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('title');
-            $table->string('result')->nullable(); 
-            $table->string('score')->nullable(); 
             $table->string('logo')->nullable(); 
         });
     }

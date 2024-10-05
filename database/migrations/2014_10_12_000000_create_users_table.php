@@ -17,14 +17,9 @@ return new class extends Migration
             $table->string('l_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-            $table->string('pos')->nullable();
-            $table->string('ht')->nullable();
-            $table->integer('wt')->nullable();
-            $table->integer('age')->nullable();
         });
     }
 
