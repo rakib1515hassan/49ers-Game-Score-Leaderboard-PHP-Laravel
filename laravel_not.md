@@ -68,13 +68,7 @@
     >> php artisan make:seeder <Seeder Name>
 
     >> php artisan db:seed
-
-    # Rollback all migrations
-    >> php artisan migrate:rollback
-    >> php artisan migrate:reset
-
-    # Rollback all migrations and run them all again
-    >> php artisan migrate:refresh
+    
     >> php artisan migrate:refresh --seed
 
 
@@ -111,9 +105,50 @@
 # Clear Config Cache
     >> php artisan config:cache
 
-# Route Cash Clear 
-    >> php artisan route:clear
-    >> php artisan route:list
+# Laravel Module 
+
+    1) Install the Module Package
+        >> composer require nwidart/laravel-modules
+
+    2) Publish the configuration
+        >> php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
+    
+    3) Create the Expense Module
+        >> php artisan module:make <YourModuleName>
+
+    4) Create Database Migration
+        >> php artisan module:make-migration create_<TableName>_table <YourModuleName> 
+
+    5) Run the migration:
+        >> php artisan module:migrate <YourModuleName> 
+
+    6) Create a Controller
+        >> php artisan module:make-controller <ControllerName> <YourModuleName>
+
+    7) If you decide to publish your module’s assets,
+        Open the `Modules/<YourModuleName>/Providers/<YourModuleName>Provider.php` file
+
+        public function boot()
+        {
+            $this->publishes([
+                __DIR__.'/../Config/expense.php' => config_path('expense.php'),
+                __DIR__.'/../Resources/assets' => public_path('vendor/expense'),
+            ]);
+        }
+        publish these resources using:
+        >> php artisan vendor:publish --tag=expense
+
+        or,
+        public function boot()
+        {
+            $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
+            $this->loadViewsFrom(__DIR__.'/../Resources/views', 'advance');
+            $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        }
+
+
+
+
 
 
 ### Key Points:
@@ -123,5 +158,3 @@
 
 
 php artisan migrate:reset
-
-
